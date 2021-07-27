@@ -27,6 +27,7 @@ const Navbar = () => {
   );
 };
 const Wrapper = Styled.nav`
+max-height:60px;
  background: #F0F2F0;
  background: -webkit-linear-gradient(to right, #000C40, #F0F2F0); 
  background: linear-gradient(to right, #000C40, #F0F2F0); 

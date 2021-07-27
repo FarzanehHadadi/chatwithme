@@ -1,4 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Shadows+Into+Light&display=swap');
+/* colors:
+    #000C40, dark-blue
+    #f0f2f0, cream
+    #DAE2F8, light blue
+    #e0c3c3, ligt pink
+    #475594, medium blue
+    #ba7d04, gold
+*/
 *{
     padding: 0;
     margin: 0;
@@ -6,4 +14,5 @@
 }
 :root{
     margin:0;
+
 }
