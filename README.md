@@ -8,3 +8,4 @@
 - add avator to user
 - resolve send image problem
 - resolve errors of console
+- width of user name in navbar must be responsive

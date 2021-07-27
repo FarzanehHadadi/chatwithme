@@ -2,7 +2,7 @@ import Styled from "styled-components";
 import { AiOutlineWechat, AiOutlineLogout } from "react-icons/ai";
 import { useUserContext } from "../contexts/userContext";
 const Navbar = () => {
-  const { isUserLoggedIn, logoutUser } = useUserContext();
+  const { isUserLoggedIn, logoutUser, firebaseUser: user } = useUserContext();
   const userName = "name";
   // const isLoggedIn = true;
   return (
@@ -13,7 +13,7 @@ const Navbar = () => {
       </div>
       {isUserLoggedIn && (
         <div className="nav-logout">
-          <span>{userName}</span>
+          <span>{user.email || user.displayName}</span>
           <button className="logout-btn" onClick={logoutUser}>
             <AiOutlineLogout className="logout-icon" />
           </button>
@@ -50,8 +50,11 @@ max-height:60px;
   font-size:2rem;
   display:flex;
   span{
+    align-self:center;
+    font-size:1rem;
     text-transform:capitalize;
     padding-right:6px;
+    
   }
   .logout-icon{
     align-self: center;

@@ -23,7 +23,7 @@ const UserProvider = ({ children }) => {
     history.push("/");
   };
   return (
-    <UserContext.Provider value={{ isUserLoggedIn, logoutUser }}>
+    <UserContext.Provider value={{ isUserLoggedIn, logoutUser, firebaseUser }}>
       {children}
     </UserContext.Provider>
   );
