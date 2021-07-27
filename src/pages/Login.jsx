@@ -1,52 +1,59 @@
-import React from "react";
+import React, { useState } from "react";
 import Styled from "styled-components";
 import { FcGoogle } from "react-icons/fc";
 import { FiGithub } from "react-icons/fi";
 import Modal from "../components/Modal";
-class Login extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      showModal: true,
-    };
-  }
-  hideModal = () => {
-    this.setState({ ...this.state, showModal: false });
+import auth from "../components/Firebase";
+import firebase from "firebase/app";
+
+const Login = () => {
+  const [modal, setModal] = useState({ show: false, text: "" });
+
+  const googleProvider = new firebase.auth.GoogleAuthProvider();
+  googleProvider.setCustomParameters({ prompt: "select_account" });
+  const githubProvider = new firebase.auth.GithubAuthProvider();
+  githubProvider.setCustomParameters({
+    prompt: "select_account",
+    allow_signup: "true",
+  });
+  const showModal = (text) => {
+    setModal({ text, show: true });
   };
-  render() {
-    return (
-      <Wrapper>
-        <div className="login-form-container">
-          {this.state.showModal && (
-            <Modal
-              text="Lorem, ipsum dolor sit amet consectetur adipisicing elit. Laudantium, aliquid?"
-              hideModal={this.hideModal}
-            />
-          )}
-          <h1>
-            join us in <span className="title">chat with me</span>
-          </h1>
-          <button
-            className="login-btn"
-            onClick={() => {
-              console.log("i am login  with google");
-            }}
-          >
-            <FcGoogle className="login-icon" /> sign in with google
-          </button>
-          <button
-            className="login-btn"
-            onClick={() => {
-              console.log("i am login  with github");
-            }}
-          >
-            <FiGithub className="login-icon" /> sign in with github
-          </button>
-        </div>
-      </Wrapper>
-    );
-  }
-}
+  const hideModal = () => {
+    setModal({ ...modal, show: false });
+  };
+
+  return (
+    <Wrapper>
+      <div className="login-form-container">
+        {modal?.show && <Modal text={modal?.text} hideModal={hideModal} />}
+        <h1>
+          join us in <span className="title">chat with me</span>
+        </h1>
+        <button
+          className="login-btn"
+          onClick={() => {
+            auth.signInWithRedirect(googleProvider).catch((e) => {
+              showModal(e.message);
+            });
+          }}
+        >
+          <FcGoogle className="login-icon" /> sign in with google
+        </button>
+        <button
+          className="login-btn"
+          onClick={() => {
+            auth.signInWithRedirect(githubProvider).catch((e) => {
+              showModal(e.message);
+            });
+          }}
+        >
+          <FiGithub className="login-icon" /> sign in with github
+        </button>
+      </div>
+    </Wrapper>
+  );
+};
 
 const Wrapper = Styled.section`
 height: calc(100vh - 60px);
