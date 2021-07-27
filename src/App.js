@@ -4,6 +4,7 @@ import Login from "./pages/Login";
 import Chatroom from "./pages/Chatroom";
 import Navbar from "./components/Navbar";
 import { UserProvider } from "./contexts/userContext";
+import "./App.css";
 
 const APP = () => {
   return (
