@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import Styled from "styled-components";
 import { FcGoogle } from "react-icons/fc";
 import { FiGithub } from "react-icons/fi";
@@ -19,9 +19,9 @@ const Login = () => {
   const showModal = (text) => {
     setModal({ text, show: true });
   };
-  const hideModal = () => {
+  const hideModal = useCallback(() => {
     setModal({ ...modal, show: false });
-  };
+  }, [modal]);
 
   return (
     <Wrapper>

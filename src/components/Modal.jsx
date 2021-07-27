@@ -5,7 +5,7 @@ const Modal = ({ text, hideModal }) => {
     setTimeout(() => {
       hideModal();
     }, 5000);
-  }, [text]);
+  }, [text, hideModal]);
   return (
     <Wrapper>
       <p>{text}</p>

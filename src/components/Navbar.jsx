@@ -2,23 +2,19 @@ import Styled from "styled-components";
 import { AiOutlineWechat, AiOutlineLogout } from "react-icons/ai";
 import { useUserContext } from "../contexts/userContext";
 const Navbar = () => {
+  const { isUserLoggedIn, logoutUser } = useUserContext();
   const userName = "name";
-  const isLoggedIn = true;
+  // const isLoggedIn = true;
   return (
     <Wrapper>
       <div className="logo">
         <AiOutlineWechat className="logo-icon" />
         <h1>chat with me</h1>{" "}
       </div>
-      {isLoggedIn && (
+      {isUserLoggedIn && (
         <div className="nav-logout">
           <span>{userName}</span>
-          <button
-            className="logout-btn"
-            onClick={() => {
-              console.log("i am log out");
-            }}
-          >
+          <button className="logout-btn" onClick={logoutUser}>
             <AiOutlineLogout className="logout-icon" />
           </button>
         </div>
