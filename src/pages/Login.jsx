@@ -5,7 +5,6 @@ import { FiGithub } from "react-icons/fi";
 import Modal from "../components/Modal";
 import auth from "../components/Firebase";
 import firebase from "firebase/app";
-
 const Login = () => {
   const [modal, setModal] = useState({ show: false, text: "" });
 
@@ -33,8 +32,9 @@ const Login = () => {
         <button
           className="login-btn"
           onClick={() => {
-            auth.signInWithRedirect(googleProvider).catch((e) => {
+            auth.signInWithPopup(googleProvider).catch((e) => {
               showModal(e.message);
+              console.log(e.message);
             });
           }}
         >
@@ -43,8 +43,9 @@ const Login = () => {
         <button
           className="login-btn"
           onClick={() => {
-            auth.signInWithRedirect(githubProvider).catch((e) => {
+            auth.signInWithPopup(githubProvider).catch((e) => {
               showModal(e.message);
+              console.log(e.message);
             });
           }}
         >
@@ -98,3 +99,14 @@ max-width:300px;
 }
 `;
 export default Login;
+
+// () => {
+//             auth
+//               .signInWithRedirect(googleProvider)
+//               .then(() => {
+//                 console.log("sign in successfully");
+//               })
+//               .catch((e) => {
+//                 showModal(e.message);
+//               });
+//           }

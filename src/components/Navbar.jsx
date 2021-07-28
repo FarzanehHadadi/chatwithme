@@ -3,8 +3,6 @@ import { AiOutlineWechat, AiOutlineLogout } from "react-icons/ai";
 import { useUserContext } from "../contexts/userContext";
 const Navbar = () => {
   const { isUserLoggedIn, logoutUser, firebaseUser: user } = useUserContext();
-  const userName = "name";
-  // const isLoggedIn = true;
   return (
     <Wrapper>
       <div className="logo">
