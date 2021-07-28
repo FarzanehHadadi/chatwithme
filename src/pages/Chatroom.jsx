@@ -10,6 +10,26 @@ const Chatroom = () => {
     2. check if user is ther or not
     3. if not add user to users*/
   }
+  const creaetNewUserInChatEngine = () => {
+    const axios = require("axios");
+    const data = {
+      username: user.email,
+      secret: user.uid,
+      email: user.email,
+      first_name: user.displayName,
+    };
+    const config = {
+      url: "https://api.chatengine.io/users/",
+      method: "post",
+      headers: {
+        "PRIVATE-KEY": "bf525d2b-2f41-408a-97eb-37a8c0e97087",
+      },
+      data,
+    };
+    axios(config)
+      .then((response) => console.log(JSON.stringify(response.data)))
+      .catch((e) => console.log(e.message));
+  };
   const getUserFromChatEngine = () => {
     let axios = require("axios");
     let config = {
@@ -24,9 +44,11 @@ const Chatroom = () => {
         (curUser) => curUser.username === user.email
       );
       if (!tempUser) {
+        creaetNewUserInChatEngine();
       }
     });
   };
+
   useEffect(() => {
     if (!user) return;
     getUserFromChatEngine();
@@ -38,8 +60,8 @@ const Chatroom = () => {
     <div>
       <ChatEngine
         height="calc(100vh - 100px)"
-        userName="admin"
-        userSecret="admin"
+        userName={user.email}
+        userSecret={user.uid}
         projectID="e28658d0-5a47-4e0f-9ced-2db58bab8ee7"
       />
     </div>
